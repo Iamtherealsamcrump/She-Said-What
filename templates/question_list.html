@@ -1,0 +1,21 @@
+<!-- templates/question_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h2>All Questions</h2>
+
+    {% for q in questions %}
+        <p><strong>Q:</strong> {{ q.body }}</p>
+        {% if q.answer %}
+            <p><strong>A:</strong> {{ q.answer }}</p>
+        {% else %}
+            <p><em>No answer yet</em></p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+</body>
+</html>
