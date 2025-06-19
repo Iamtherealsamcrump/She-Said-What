@@ -92,14 +92,16 @@ def answer(q_id):
         return redirect(url_for('dashboard'))
     return render_template('answer.html', q=q)
 
-@app.route('/init-db')
-def init_db():
-    db.create_all()
-    if not User.query.filter_by(username='admin').first():
-        hashed = generate_password_hash('changeme')
-        db.session.add(User(username='admin', password_hash=hashed))
-        db.session.commit()
-    return 'Database initialized!'
+@app.route('/')
+def index():
+    # Check if the Post table exists
+    try:
+        posts = Post.query.all()
+        questions = Question.query.all()
+    except:
+        return '⚠️ Database not initialized. Visit /init-db first.'
+
+    return render_template('index.html', posts=posts, questions=questions)
     
 if __name__ == '__main__':
     if not os.path.exists('blog.db'):
