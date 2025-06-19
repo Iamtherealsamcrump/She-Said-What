@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}{% for q in questions %}<p>{{ q.body }} — {{ q.answer or 'Pending' }}</p>{% endfor %}{% endblock %}
