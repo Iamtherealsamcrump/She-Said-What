@@ -92,13 +92,13 @@ def answer(q_id):
         return redirect(url_for('dashboard'))
     return render_template('answer.html', q=q)
 
-if __name__ == '__main__':
-    if not os.path.exists('blog.db'):
-        db.create_all()
-        create_admin()
-    app.run(debug=True)
 @app.route('/init-db')
 def init_db():
     db.create_all()
     create_admin()
     return 'Database initialized!'
+if __name__ == '__main__':
+    if not os.path.exists('blog.db'):
+        db.create_all()
+        create_admin()
+    app.run(debug=True)
