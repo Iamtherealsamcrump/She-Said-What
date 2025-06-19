@@ -104,6 +104,18 @@ def init_db():
         db.session.add(User(username='admin', password_hash=hashed))
         db.session.commit()
     return 'Database initialized!'
+
+@app.route('/reset-admin')
+def reset_admin():
+    from werkzeug.security import generate_password_hash
+    admin = User.query.filter_by(username='admin').first()
+    if not admin:
+        admin = User(username='admin', password_hash=generate_password_hash('changeme'))
+        db.session.add(admin)
+    else:
+        admin.password_hash = generate_password_hash('changeme')
+    db.session.commit()
+    return '✅ Admin password reset to changeme'
     
 if __name__ == '__main__':
     if not os.path.exists('blog.db'):
