@@ -91,11 +91,6 @@ def answer(q_id):
         db.session.commit()
         return redirect(url_for('dashboard'))
     return render_template('answer.html', q=q)
-@app.route('/')
-def index():
-    posts = Post.query.all()
-    questions = Question.query.all()
-    return render_template('index.html', posts=posts, questions=questions)
 
 @app.route('/init-db')
 def init_db():
