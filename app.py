@@ -38,12 +38,6 @@ def create_admin():
         db.session.commit()
         print("Admin user 'admin' with password 'changeme' created!")
 
-@app.route('/')
-def index():
-    posts = Post.query.all()
-    questions = Question.query.all()
-    return render_template('index.html', posts=posts, questions=questions)
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
