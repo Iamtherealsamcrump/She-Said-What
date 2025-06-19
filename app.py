@@ -95,8 +95,12 @@ def answer(q_id):
 @app.route('/init-db')
 def init_db():
     db.create_all()
-    create_admin()
+    if not User.query.filter_by(username='admin').first():
+        hashed = generate_password_hash('changeme')
+        db.session.add(User(username='admin', password_hash=hashed))
+        db.session.commit()
     return 'Database initialized!'
+    
 if __name__ == '__main__':
     if not os.path.exists('blog.db'):
         db.create_all()
