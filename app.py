@@ -97,3 +97,8 @@ if __name__ == '__main__':
         db.create_all()
         create_admin()
     app.run(debug=True)
+    @app.route('/init-db')
+def init_db():
+    db.create_all()
+    create_admin()
+    return 'Database initialized!'
