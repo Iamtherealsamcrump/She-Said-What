@@ -94,7 +94,6 @@ def index():
         questions = Question.query.all()
     except:
         return '⚠️ Database not initialized. Visit /init-db first.'
-
     return render_template('index.html', posts=posts, questions=questions)
     
 if __name__ == '__main__':
