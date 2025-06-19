@@ -95,6 +95,15 @@ def index():
     except:
         return '⚠️ Database not initialized. Visit /init-db first.'
     return render_template('index.html', posts=posts, questions=questions)
+
+@app.route('/init-db')
+def init_db():
+    db.create_all()
+    if not User.query.filter_by(username='admin').first():
+        hashed = generate_password_hash('changeme')
+        db.session.add(User(username='admin', password_hash=hashed))
+        db.session.commit()
+    return 'Database initialized!'
     
 if __name__ == '__main__':
     if not os.path.exists('blog.db'):
